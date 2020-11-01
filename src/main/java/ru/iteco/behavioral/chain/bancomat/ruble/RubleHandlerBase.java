@@ -1,24 +1,16 @@
-package ru.iteco.behavioral.chain.bancomat.dollar;
+package ru.iteco.behavioral.chain.bancomat.ruble;
 
-import ru.iteco.behavioral.chain.bancomat.banknote.Banknote;
-import ru.iteco.behavioral.chain.bancomat.banknote.BanknoteHandler;
-import ru.iteco.behavioral.chain.bancomat.banknote.CurrencyType;
-import ru.iteco.behavioral.chain.bancomat.banknote.UsdBanknote;
+import ru.iteco.behavioral.chain.bancomat.banknote.*;
 
-/**
- * TenRubleHandler.
- *
- * @author Ilya_Sukhachev
- */
-public abstract class DollarHandlerBase extends BanknoteHandler {
-    protected DollarHandlerBase(BanknoteHandler nextHandler) {
+public abstract class RubleHandlerBase extends BanknoteHandler {
+    protected RubleHandlerBase(BanknoteHandler nextHandler) {
         super(nextHandler);
     }
 
     @Override
     public boolean validate(Banknote banknote) {
         if (banknote.getValue().equals(String.valueOf(getValue()))
-        &&banknote.getCurrency().equals(CurrencyType.USD)) {
+                && banknote.getCurrency().equals(CurrencyType.RUB)) {
             return true;
         }
         return super.validate(banknote);
@@ -26,7 +18,7 @@ public abstract class DollarHandlerBase extends BanknoteHandler {
 
     @Override
     public boolean cash(Banknote banknote) {
-        if (banknote.getCurrency().equals(CurrencyType.USD)) {
+        if (banknote.getCurrency().equals(CurrencyType.RUB)) {
             int issue = getValue();
             int entrance = Integer.parseInt(banknote.getValue());
             if(entrance/issue == 0) {
@@ -36,10 +28,12 @@ public abstract class DollarHandlerBase extends BanknoteHandler {
                 if (entrance%issue == 0) {
                     return true;
                 } else {
-                    return super.cash(new UsdBanknote(String.valueOf(entrance%issue)));
+                    return super.cash(new RubBanknote(String.valueOf(entrance%issue)));
                 }
             }
         }
         return super.cash(banknote);
     }
+
+    protected abstract int getValue();
 }

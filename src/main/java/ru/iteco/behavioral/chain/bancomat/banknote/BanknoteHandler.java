@@ -13,11 +13,13 @@ public abstract class BanknoteHandler {
         this.nextHandler = nextHandler;
     }
 
-    public boolean validate(String banknote) {
+    public boolean validate(Banknote banknote) {
         return nextHandler != null && nextHandler.validate(banknote);
     }
 
-    public boolean cash(String banknote) {
+    public boolean cash(Banknote banknote) {
         return nextHandler != null && nextHandler.cash(banknote);
     }
+
+    protected abstract int getValue();
 }

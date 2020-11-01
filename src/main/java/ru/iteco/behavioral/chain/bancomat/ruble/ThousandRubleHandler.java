@@ -7,11 +7,11 @@ import ru.iteco.behavioral.chain.bancomat.banknote.BanknoteHandler;
  *
  * @author Ilya_Sukhachev
  */
-public class TenRubleHandler extends RubleHandlerBase {
+public class ThousandRubleHandler extends RubleHandlerBase {
 
-    protected  int value = 10;
+    protected  int value = 1000;
 
-    public TenRubleHandler(BanknoteHandler nextHandler) {
+    public ThousandRubleHandler(BanknoteHandler nextHandler) {
         super(nextHandler);
     }
 
